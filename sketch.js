@@ -42,7 +42,7 @@ function setup() {
   skyColorsFrom.push(color(62, 84, 143), color(125, 155, 147), color(255, 214, 101), 
   color(193, 113, 67), color(205, 74, 74));
 
-  //The colors are: [0]sea green, [1]bright yellow, [2]orange red
+  //The colors are: [0]sea green, [1]bright yellow, [2]orange red, [3]dark red
   skyColorsTo.push(color(125, 155, 147), color(255, 214, 101), color(193, 113, 67), color(205, 74, 74));
 
   //Build four arrays: skyColorLerp A/B/C/D to contain the lerpColor() results between the 
@@ -89,26 +89,25 @@ function setup() {
   rows=windowHeight/scl;
   //Define the color arrays for lerpColor().
 
-  //The colors are: [0]navy blue, [1]sea green, [2]bright yellow, [3]orange red, [4]dark red
+
+  //The colors are: [0]dark red, [1]orange red, [2]bright yellow, [3]sea green
   waterColorsFrom.push(
-    //color(205, 74, 74),
-    color(193, 113, 67),
-    color(255, 214, 101),
-    color(125, 155, 147),
-    color(62, 84, 143)
-
-  );
-
-  //The colors are: [0]sea green, [1]bright yellow, [2]orange red
-  waterColorsTo.push(
     color(205, 74, 74),
     color(193, 113, 67),
     color(255, 214, 101),
     color(125, 155, 147)
   );
+  //The colors are: [0]orange red, [1]bright yellow, [2]sea green, [3]navy blue,
+  waterColorsTo.push(
+    color(193, 113, 67),
+    color(255, 214, 101),
+    color(125, 155, 147),
+    color(62, 84, 143)
+  );
 
-  //Build four arrays: skyColorLerp A/B/C/D to contain the lerpColor() results between the
-  //skyColorsFrom[] and skyColorsTo[]
+
+  //Build four arrays: waterColorLerp A/B/C/D to contain the lerpColor() results between the
+  //waterColorsFrom[] and waterColorsTo[]
 
   //A
   for (let k = 1; k < 9; k++) {
@@ -201,9 +200,9 @@ function waterSurface(){
   randomSeed(45);
   translate(0, windowHeight/ 2);
   let yoff = 0;
-  for (let y = 0; y < rows / 2; y++) {//"i" stands for "y"
+  for (let y = 0; y < rows / 2; y++) {
     let xoff= 0;
-    for (let x = 0; x < cols; x++) {//"j" stands for "x"
+    for (let x = 0; x < cols; x++) {
       let angle = noise(xoff, yoff) * TWO_PI;
       let v = p5.Vector.fromAngle(angle * -0.2);
       xoff += inc;
@@ -216,7 +215,7 @@ function waterSurface(){
       rect(0, 0, 23, 4);
       pop();
     }
-    console.log(y);
+    //console.log(y);
 
     if (y < 14) {
       fill(waterColorsLerpA[y%8]);
