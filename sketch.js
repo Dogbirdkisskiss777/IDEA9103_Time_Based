@@ -133,20 +133,33 @@ function setup() {
 
   w=windowWidth;
   h=windowHeight;
-  unitX=w/32;//unit coordinate for x
+  unitX=w/36;//unit coordinate for x
   unitY=h/32;//unit coordinate for y
 
   shadow();
   blurryBg1();//transition
   blurryBg2();//distant building
 
-  noLoop();
+  //noLoop();
 }
 
 function draw() {
   //background(255);
 
+
+  if(frameCount < 30){
+    frameCount += 30;
+  }else if(frameCount > 127){
+    frameCount = 128;
+  }
+
+  frameCountSky = frameCount / 2;
+
+  brushWidth = height / frameCountSky;
+
   drawSkyEllipse();
+
+  scl = windowHeight/frameCount;
 
   waterSurface();
 
@@ -193,6 +206,7 @@ function draw() {
   waterColor(polyShadow,71,41,50,20);
   waterColor(polyBlurry1,20,70,10,10);//transition
   waterColor(polyBlurry2,40,90,30,5);//distant building
+
 }
 
 function waterSurface(){
@@ -416,7 +430,7 @@ function distribute(x){
 
 
 
-// 更新尺寸相关的变量
+// The size change.
 function updateDimensions() {
   w = width;
   h = height;
@@ -435,7 +449,7 @@ function updateWater(){
   yoff = 0;
 }
 
-// 响应窗口大小变化
+// Response to the change of window's size.
 function windowResized() {
   clear();
   brushWidth = height / 64;
