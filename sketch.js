@@ -207,6 +207,11 @@ function draw() {
   waterColor(polyBlurry1,20,70,10,10);//transition
   waterColor(polyBlurry2,40,90,30,5);//distant building
 
+  if(frameCount % 5 == 0){
+    updateDimensions();
+    updateWater();
+  }
+
 }
 
 function waterSurface(){
